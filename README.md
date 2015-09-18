@@ -14,13 +14,11 @@ MAGE Android Wear was developed at the National Geospatial-Intelligence Agency (
 
 ./gradlew assembleDebug
 
-### Install
-
-#### Over USB
+### Install Over USB
 
 ./gradlew installDebug
 
-#### Over Bluetooth
+### Install Over Bluetooth
 
 You will need a android device with android wear installed on it.  And you will need to enable bluetooth debugging:
 adb forward tcp:4444 localabstract:/adb-hub
