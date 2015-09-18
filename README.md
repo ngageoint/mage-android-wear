@@ -2,7 +2,7 @@
 
 09/18/2015
 
-This is the MAGE Android Wear application for Android wearables. See the [MAGE client](https://github.com/ngageoint/mage-android) for more information.
+This is the MAGE Android Wear application for Android wearables. Depends on the [ChronosTouch Library](https://github.com/ngageoint/mage-chronostouch-android).  See the [MAGE client](https://github.com/ngageoint/mage-android) for more information.
 
 MAGE Android Wear was developed at the National Geospatial-Intelligence Agency (NGA) in collaboration with BIT Systems. The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions. The software use, modification, and distribution rights are stipulated within the Apache license.
 
