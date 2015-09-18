@@ -20,12 +20,12 @@ MAGE Android Wear was developed at the National Geospatial-Intelligence Agency (
 
 ### Install Over Bluetooth
 
-You will need a android device with android wear installed on it.  And you will need to enable bluetooth debugging:
-adb forward tcp:4444 localabstract:/adb-hub
-adb connect localhost:4444
+You will need a android device with android wear installed on it.  And you will need to enable bluetooth debugging:  
+adb forward tcp:4444 localabstract:/adb-hub  
+adb connect localhost:4444  
 
-Then install the built apk:
-adb -s localhost:4444 install ./magewear/build/outputs/apk/magewear-debug.apk
+Then install the built apk:  
+adb -s localhost:4444 install ./magewear/build/outputs/apk/magewear-debug.apk  
 
 ## Pull Requests
 
