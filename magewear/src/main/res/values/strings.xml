@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">MAGE</string>
-    <string name="intro_text">Long click to exit the map.</string>
-
-    <string name="confirm">Action completed.</string>
-    <string name="cancel">Action canceled.</string>
-    <string name="performing">Performing action...</string>
+    <string name="confirm">Action completed</string>
+    <string name="cancel">Action canceled</string>
 </resources>

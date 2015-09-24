@@ -153,6 +153,8 @@ public class LandingActivity extends FragmentActivity implements OnMapReadyCallb
 
 	@Override
 	public void onTimerFinished(View v) {
+
+		// send the gesture and description to the device!
 		DataManager dataManager = DataManager.getInstance(getApplicationContext());
 		dataManager.createMap(OBSERVATION_PATH);
 		dataManager.addDataItem(OBSERVATION_PATH, GESTURE_KEY, mGesture);
@@ -180,7 +182,7 @@ public class LandingActivity extends FragmentActivity implements OnMapReadyCallb
 	private void displaySpeechRecognizer() {
 		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-		intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Give a short description.");
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Provide a brief description");
 		// Start the activity, the intent will be populated with the speech text
 		startActivityForResult(intent, SPEECH_REQUEST_CODE);
 	}
