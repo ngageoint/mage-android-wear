@@ -9,11 +9,12 @@ import android.speech.RecognizerIntent;
 import android.support.v4.app.FragmentActivity;
 import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.view.DelayedConfirmationView;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
+import com.android.internal.util.Predicate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,9 +23,12 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import mil.nga.giat.chronostouch.gesture.OnDelayedGestureListener;
 import mil.nga.giat.chronostouch.pipe.DataManager;
 
 public class LandingActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener, DelayedConfirmationView.DelayedConfirmationListener {
+
+	protected static final String LOG_NAME = LandingActivity.class.getName();
 
 	private static final String OBSERVATION_PATH = "/observation";
 	private static final String GESTURE_KEY = "gesture";
@@ -97,6 +101,10 @@ public class LandingActivity extends FragmentActivity implements OnMapReadyCallb
 
 			// Move the camera to show the marker.
 			mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+		} else {
+			LatLng latLng = new LatLng(40.0, 263.0);
+			float zoom = 3.0f;
+			mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 		}
 	}
 
@@ -105,28 +113,27 @@ public class LandingActivity extends FragmentActivity implements OnMapReadyCallb
 		mGestureOverlay.cancelClearAnimation();
 		mGestureOverlay.clear(true);
 		mGestureOverlay.setBackgroundColor(getResources().getColor(R.color.transparent_white));
-		mGestureOverlay.addOnGestureListener(new GestureOverlayView.OnGestureListener() {
-			@Override
-			public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
+		mGestureOverlay.addOnGestureListener(new OnDelayedGestureListener(
+				new Predicate<GestureOverlayView>() {
+					@Override
+					public boolean apply(GestureOverlayView gestureOverlayView) {
+						return true;
+					}
+				},
+				new Predicate<Object>() {
+					@Override
+					public boolean apply(Object gesture) {
+						if (gesture == null) {
+							// todo : tell user there was no match
+							return false;
+						} else {
+							mGesture = (Gesture) gesture;
+							displaySpeechRecognizer();
+							return true;
+						}
+					}
+				}));
 
-			}
-
-			@Override
-			public void onGesture(GestureOverlayView overlay, MotionEvent event) {
-
-			}
-
-			@Override
-			public void onGestureEnded(GestureOverlayView overlay, MotionEvent event) {
-				mGesture = overlay.getGesture();
-				displaySpeechRecognizer();
-			}
-
-			@Override
-			public void onGestureCancelled(GestureOverlayView overlay, MotionEvent event) {
-
-			}
-		});
 		mGestureOverlay.setEventsInterceptionEnabled(true);
 		mGestureOverlay.setVisibility(View.VISIBLE);
 	}

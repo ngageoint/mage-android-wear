@@ -1,6 +1,6 @@
 # MAGE Android Wear
 
-09/18/2015
+09/30/2015
 
 This is the MAGE Android Wear application for Android wearables. Depends on the [ChronosTouch Library](https://github.com/ngageoint/mage-chronostouch-android).  See the [MAGE client](https://github.com/ngageoint/mage-android) for more information.
 
@@ -25,6 +25,7 @@ adb forward tcp:4444 localabstract:/adb-hub
 adb connect localhost:4444  
 
 Then install the built apk:  
+adb -s localhost:4444 uninstall mil.nga.giat.mage
 adb -s localhost:4444 install ./magewear/build/outputs/apk/magewear-debug.apk  
 
 ## Pull Requests
