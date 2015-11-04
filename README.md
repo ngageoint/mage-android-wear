@@ -1,6 +1,6 @@
 # MAGE Android Wear
 
-10/02/2015
+11/04/2015
 
 This is the MAGE Android Wear application for Android wearables.
 
@@ -15,24 +15,38 @@ MAGE Android Wear was developed at the National Geospatial-Intelligence Agency (
 ## How to Build
 
 ### Build
-
+```bash
 ./gradlew clean
-
 ./gradlew assembleDebug
+```
 
 ### Install Over USB
-
+```bash
 ./gradlew installDebug
+```
 
 ### Install Over Bluetooth
 
 You will need a android device with android wear installed on it.  And you will need to enable bluetooth debugging:  
+```bash
 adb forward tcp:4444 localabstract:/adb-hub  
 adb connect localhost:4444  
+```
 
 Then install the built apk:  
+```bash
 adb -s localhost:4444 uninstall mil.nga.giat.mage
 adb -s localhost:4444 install ./magewear/build/outputs/apk/magewear-debug.apk  
+```
+
+### Build MAGE Android with Wearable Support
+
+In order to use the [MAGE Android client](https://github.com/ngageoint/mage-android) with your wearable, you will need to build the wear flavor of MAGE Android:
+
+```bash
+./gradlew clean
+./gradlew assembleWearDebug
+```
 
 ## Pull Requests
 
